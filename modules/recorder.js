@@ -31,8 +31,11 @@ export class Recorder {
                 if (!MediaRecorder.isTypeSupported(options.mimeType)) {
                     console.error('No supported MIME type for MediaRecorder found!');
                     alert('Your browser does not support recording video in a compatible format.');
+                    // Call the inactive callback before cleaning up
+                    if (this.onStreamInactiveCallback) {
+                        this.onStreamInactiveCallback(); // Notify UI about stream ending due to error
+                    }
                     this.stopStreamAndCleanUp();
-                    this.onStreamInactiveCallback(); // Notify UI about stream ending due to error
                     return;
                 }
             }
@@ -62,8 +65,13 @@ export class Recorder {
                 if (this.mediaRecorder && this.mediaRecorder.state === 'recording') {
                     this.mediaRecorder.stop();
                 } else {
+                    // If recorder is not active, but stream became inactive (e.g., user cancelled sharing)
+                    // We need to inform the UI and clean up.
+                    // Call the callback BEFORE cleaning up, as cleanup nullifies it.
+                    if (this.onStreamInactiveCallback) {
+                        this.onStreamInactiveCallback(); // Notify UI about inactive stream
+                    }
                     this.stopStreamAndCleanUp(); // Clean up if stream ends without active recording
-                    this.onStreamInactiveCallback(); // Notify UI about inactive stream
                 }
             };
 
@@ -73,8 +81,11 @@ export class Recorder {
         } catch (err) {
             console.error('Error starting recording:', err);
             alert('Could not start screen recording. Please ensure you granted permissions. Error: ' + err.message);
+            // Call the inactive callback before cleaning up
+            if (this.onStreamInactiveCallback) {
+                this.onStreamInactiveCallback(); // Notify UI about stream ending due to error
+            }
             this.stopStreamAndCleanUp(); // Ensure clean up even if start fails
-            this.onStreamInactiveCallback(); // Notify UI about stream ending due to error
         }
     }
 
