@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+h1, h2 {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: #007bff;
+    color: white;
+}
+
+.button:hover:not(:disabled) {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.video-preview {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#videoPreview {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+.desktop-audio-info, .editor-info {
+    background-color: #e9f7ff;
+    border: 1px solid #cceeff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.desktop-audio-info p, .editor-info p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.desktop-audio-info strong {
+    color: #007bff;
+}
+
+.desktop-audio-info small, .editor-info small {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.85em;
+}
+
+#bridgeStatus {
+    font-weight: bold;
+    color: red; /* Default to disconnected */
+}
+

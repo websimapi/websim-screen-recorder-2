@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Browser Tab/Screen Recorder</h1>
+
+        <div class="controls">
+            <button id="startRecording" class="button">Start Recording</button>
+            <button id="stopRecording" class="button" disabled>Stop Recording</button>
+            <button id="downloadVideo" class="button" disabled>Download Video</button>
+        </div>
+
+        <div class="video-preview">
+            <h2>Preview</h2>
+            <video id="videoPreview" autoplay muted></video>
+        </div>
+
+        <div class="desktop-audio-info">
+            <h2>Desktop Audio (Advanced)</h2>
+            <p>For capturing audio from desktop applications (not browser tabs/windows), you need a local bridge application.</p>
+            <p>This web application can integrate with a separate Node.js or Python script running on your machine to capture and relay desktop audio.</p>
+            <p><strong>Status:</strong> <span id="bridgeStatus">Disconnected</span> (requires external bridge application and connection)</p>
+            <p>
+                <small><em>(The external bridge application is not provided by this web tool. You would need to download and run it separately, and it would connect to this web page, likely via WebSockets, to send audio data. This feature is conceptual for this web-only tool.)</em></small>
+            </p>
+        </div>
+
+        <div class="editor-info">
+            <h2>Edit in Editor</h2>
+            <p>After recording, you can download the video and use it in your preferred video editing software.</p>
+            <p><small><em>(A built-in editor is beyond the scope of this simple tool.)</em></small></p>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
