@@ -8,14 +8,19 @@ export class Recorder {
         this.onStreamInactiveCallback = null;
     }
 
-    async startRecording(onStreamActive, onRecordingStopped, onStreamInactive) {
+    async startRecording(qualitySettings, onStreamActive, onRecordingStopped, onStreamInactive) {
         this.onStreamActiveCallback = onStreamActive;
         this.onRecordingStoppedCallback = onRecordingStopped;
         this.onStreamInactiveCallback = onStreamInactive;
 
+        const videoConstraints = {
+            mediaSource: 'screen',
+            frameRate: qualitySettings.frameRate
+        };
+
         try {
             this.mediaStream = await navigator.mediaDevices.getDisplayMedia({
-                video: { mediaSource: 'screen' },
+                video: videoConstraints,
                 audio: {
                     echoCancellation: true,
                     noiseSuppression: true
@@ -24,7 +29,11 @@ export class Recorder {
 
             this.onStreamActiveCallback(this.mediaStream); // Notify UI to show preview
 
-            const options = { mimeType: 'video/webm; codecs=vp8' };
+            const options = { 
+                mimeType: 'video/webm; codecs=vp8',
+                videoBitsPerSecond: qualitySettings.bitsPerSecond
+            };
+
             if (!MediaRecorder.isTypeSupported(options.mimeType)) {
                 console.warn(`${options.mimeType} is not supported, trying default.`);
                 options.mimeType = 'video/webm';
@@ -39,6 +48,7 @@ export class Recorder {
                     return;
                 }
             }
+            
             this.mediaRecorder = new MediaRecorder(this.mediaStream, options);
 
             this.mediaRecorder.ondataavailable = (event) => {

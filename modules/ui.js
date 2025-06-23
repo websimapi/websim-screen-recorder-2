@@ -5,6 +5,7 @@ export class UI {
         this.stopRecordingBtn = document.getElementById('stopRecording');
         this.downloadVideoBtn = document.getElementById('downloadVideo');
         this.bridgeStatusSpan = document.getElementById('bridgeStatus');
+        this.recordingQualitySelect = document.getElementById('recordingQuality'); // New element
     }
 
     init(onStartClick, onStopClick) {
@@ -22,6 +23,7 @@ export class UI {
     updateRecordingState(isRecording) {
         this.startRecordingBtn.disabled = isRecording;
         this.stopRecordingBtn.disabled = !isRecording;
+        this.recordingQualitySelect.disabled = isRecording; // Disable quality selection during recording
         if (isRecording) {
             this.disableDownloadButton(); // Disable download when a new recording starts
         }
@@ -52,6 +54,23 @@ export class UI {
         this.downloadVideoBtn.href = '#'; // Reset href to avoid previous download
         this.downloadVideoBtn.download = '';
         this.downloadVideoBtn.disabled = true;
+    }
+
+    /**
+     * Returns selected recording quality settings.
+     * @returns {{frameRate: number, bitsPerSecond: number}}
+     */
+    getRecordingQuality() {
+        const selectedValue = this.recordingQualitySelect.value;
+        switch (selectedValue) {
+            case 'low':
+                return { frameRate: 15, bitsPerSecond: 1_000_000 }; // 1 Mbps
+            case 'high':
+                return { frameRate: 60, bitsPerSecond: 6_000_000 }; // 6 Mbps
+            case 'medium':
+            default:
+                return { frameRate: 30, bitsPerSecond: 3_000_000 }; // 3 Mbps
+        }
     }
 
     // Method to update bridge status (conceptual, not dynamic in this app)

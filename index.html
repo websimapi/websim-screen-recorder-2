@@ -21,6 +21,14 @@
         <div class="controls">
             <button id="startRecording" class="button">Start Recording</button>
             <button id="stopRecording" class="button" disabled>Stop Recording</button>
+            <div class="quality-select-wrapper">
+                <label for="recordingQuality">Quality:</label>
+                <select id="recordingQuality" class="button">
+                    <option value="medium">Medium (30fps, 3Mbps)</option>
+                    <option value="high">High (60fps, 6Mbps)</option>
+                    <option value="low">Low (15fps, 1Mbps)</option>
+                </select>
+            </div>
             <a id="downloadVideo" class="button" disabled>Download Video</a>
         </div>
 

@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ui.disableDownloadButton(); // Ensure download is disabled on new recording attempt
             ui.hidePreview(); // Hide old preview until new stream is active
 
+            const qualitySettings = ui.getRecordingQuality(); // Get selected quality settings
+
             await recorder.startRecording(
+                qualitySettings, // Pass quality settings to recorder
                 (stream) => { // onStreamActive callback for Recorder
                     ui.showPreview(stream);
                 },

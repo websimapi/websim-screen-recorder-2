@@ -31,6 +31,7 @@ h1, h2 {
     justify-content: center;
     gap: 15px;
     margin-bottom: 30px;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
 .button {
@@ -52,6 +53,46 @@ h1, h2 {
 .button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+.quality-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quality-select-wrapper label {
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap; /* Prevent label from wrapping */
+}
+
+#recordingQuality {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    -webkit-appearance: none; /* Remove default dropdown arrow for consistency */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%20width%3D%2216%22%20height%3D%2216%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M206.294%2099.988l-78.571%2078.571c-4.686%204.686-12.284%204.686-16.971%200l-78.571-78.571c-4.686-4.686-4.686-12.284%200-16.971%204.686-4.686%2012.284-4.686%2016.971%200L128%20146.029l70.138-70.138c4.686-4.686%2012.284-4.686%2016.971%200%204.686%204.686%204.686%2012.284%200%2016.971z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px; /* Make space for the custom arrow */
+}
+
+#recordingQuality:hover {
+    border-color: #007bff;
+}
+
+#recordingQuality:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .video-preview {
@@ -97,4 +138,3 @@ h1, h2 {
     font-weight: bold;
     color: red; /* Default to disconnected */
 }
-
